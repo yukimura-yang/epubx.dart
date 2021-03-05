@@ -1,5 +1,6 @@
-# dart-epub
-[![Build Status](https://travis-ci.org/orthros/dart-epub.svg?branch=master)](https://travis-ci.org/orthros/dart-epub)
+# epubx
+
+dart-epub fork
 
 Epub Reader and Writer for Dart inspired by [this fantastic C# Epub Reader](https://github.com/versfx/EpubReader)
 
@@ -9,7 +10,7 @@ This does not rely on the ```dart:io``` package in any way, so it is avilable fo
 Add the package to the ```dependencies``` section of your pubspec.yaml
 ```
 dependencies:
-  epub: ^2.0.0
+  epubx: ^3.0.0-dev.1
 ```
 
 ## Example

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:epub/epub.dart' as epub;
+import 'package:epubx/epub.dart' as epub;
 import 'package:image/image.dart' as image;
 
 void main() => runApp(EpubWidget());

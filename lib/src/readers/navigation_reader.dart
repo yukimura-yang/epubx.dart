@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:archive/archive.dart';
 import 'dart:convert' as convert;
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:epub/src/schema/opf/epub_version.dart';
+import 'package:epubx/src/schema/opf/epub_version.dart';
 import 'package:xml/xml.dart' as xml;
 
 import '../schema/navigation/epub_metadata.dart';
@@ -37,8 +37,8 @@ class NavigationReader {
       return null;
     }
 
-    var tocManifestItem = package.Manifest!.Items!
-        .firstWhereOrNull((EpubManifestItem item) =>
+    var tocManifestItem = package.Manifest!.Items!.firstWhereOrNull(
+        (EpubManifestItem item) =>
             item.Id!.toLowerCase() == tocId.toLowerCase());
     if (tocManifestItem == null) {
       throw Exception(
@@ -47,9 +47,8 @@ class NavigationReader {
 
     var tocFileEntryPath =
         ZipPathUtils.combine(contentDirectoryPath, tocManifestItem.Href);
-    var tocFileEntry = epubArchive.files.firstWhereOrNull(
-        (ArchiveFile file) =>
-            file.name.toLowerCase() == tocFileEntryPath!.toLowerCase());
+    var tocFileEntry = epubArchive.files.firstWhereOrNull((ArchiveFile file) =>
+        file.name.toLowerCase() == tocFileEntryPath!.toLowerCase());
     if (tocFileEntry == null) {
       throw Exception(
           'EPUB parsing error: TOC file ${tocFileEntryPath} not found in archive.');
@@ -85,15 +84,13 @@ class NavigationReader {
           'EPUB parsing error: TOC file does not contain docTitle element.');
     }
 
-    var navigationDocTitle =
-        readNavigationDocTitle(docTitleNode);
+    var navigationDocTitle = readNavigationDocTitle(docTitleNode);
     result.DocTitle = navigationDocTitle;
     result.DocAuthors = <EpubNavigationDocAuthor>[];
     ncxNode
         .findElements('docAuthor', namespace: ncxNamespace)
         .forEach((xml.XmlElement docAuthorNode) {
-      var navigationDocAuthor =
-          readNavigationDocAuthor(docAuthorNode);
+      var navigationDocAuthor = readNavigationDocAuthor(docAuthorNode);
       result.DocAuthors!.add(navigationDocAuthor);
     });
 
@@ -119,8 +116,7 @@ class NavigationReader {
     ncxNode
         .findElements('navList', namespace: ncxNamespace)
         .forEach((xml.XmlElement navigationListNode) {
-      var navigationList =
-          readNavigationList(navigationListNode);
+      var navigationList = readNavigationList(navigationListNode);
       result.NavLists!.add(navigationList);
     });
 
@@ -254,13 +250,11 @@ class NavigationReader {
         .forEach((xml.XmlElement navigationListChildNode) {
       switch (navigationListChildNode.name.local.toLowerCase()) {
         case 'navlabel':
-          var navigationLabel =
-              readNavigationLabel(navigationListChildNode);
+          var navigationLabel = readNavigationLabel(navigationListChildNode);
           result.NavigationLabels!.add(navigationLabel);
           break;
         case 'navtarget':
-          var navigationTarget =
-              readNavigationTarget(navigationListChildNode);
+          var navigationTarget = readNavigationTarget(navigationListChildNode);
           result.NavigationTargets!.add(navigationTarget);
           break;
       }
@@ -279,8 +273,7 @@ class NavigationReader {
         .whereType<xml.XmlElement>()
         .forEach((xml.XmlElement navigationPointNode) {
       if (navigationPointNode.name.local.toLowerCase() == 'navpoint') {
-        var navigationPoint =
-            readNavigationPoint(navigationPointNode);
+        var navigationPoint = readNavigationPoint(navigationPointNode);
         result.Points!.add(navigationPoint);
       }
     });
@@ -295,8 +288,7 @@ class NavigationReader {
         .whereType<xml.XmlElement>()
         .forEach((xml.XmlElement pageTargetNode) {
       if (pageTargetNode.name.local == 'pageTarget') {
-        var pageTarget =
-            readNavigationPageTarget(pageTargetNode);
+        var pageTarget = readNavigationPageTarget(pageTargetNode);
         result.Targets!.add(pageTarget);
       }
     });
@@ -347,8 +339,7 @@ class NavigationReader {
           result.NavigationLabels!.add(navigationLabel);
           break;
         case 'content':
-          var content =
-              readNavigationContent(navigationPageTargetChildNode);
+          var content = readNavigationContent(navigationPageTargetChildNode);
           result.Content = content;
           break;
       }
@@ -390,13 +381,11 @@ class NavigationReader {
         .forEach((xml.XmlElement navigationPointChildNode) {
       switch (navigationPointChildNode.name.local.toLowerCase()) {
         case 'navlabel':
-          var navigationLabel =
-              readNavigationLabel(navigationPointChildNode);
+          var navigationLabel = readNavigationLabel(navigationPointChildNode);
           result.NavigationLabels!.add(navigationLabel);
           break;
         case 'content':
-          var content =
-              readNavigationContent(navigationPointChildNode);
+          var content = readNavigationContent(navigationPointChildNode);
           result.Content = content;
           break;
         case 'navpoint':
@@ -450,13 +439,11 @@ class NavigationReader {
         .forEach((xml.XmlElement navigationTargetChildNode) {
       switch (navigationTargetChildNode.name.local.toLowerCase()) {
         case 'navlabel':
-          var navigationLabel =
-              readNavigationLabel(navigationTargetChildNode);
+          var navigationLabel = readNavigationLabel(navigationTargetChildNode);
           result.NavigationLabels!.add(navigationLabel);
           break;
         case 'content':
-          var content =
-              readNavigationContent(navigationTargetChildNode);
+          var content = readNavigationContent(navigationTargetChildNode);
           result.Content = content;
           break;
       }

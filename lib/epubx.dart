@@ -1,4 +1,4 @@
-library epub;
+library epubx;
 
 export 'src/utils/enum_from_string.dart';
 

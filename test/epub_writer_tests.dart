@@ -2,7 +2,7 @@ library epubreadertest;
 
 import 'dart:io' as io;
 
-import 'package:epub/epub.dart';
+import 'package:epubx/epub.dart';
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
