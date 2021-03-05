@@ -14,12 +14,11 @@ class SchemaReader {
   static Future<EpubSchema> readSchema(Archive epubArchive) async {
     var result = EpubSchema();
 
-    var rootFilePath = await (RootFilePathReader.getRootFilePath(epubArchive) as FutureOr<String>);
+    var rootFilePath = (await RootFilePathReader.getRootFilePath(epubArchive))!;
     var contentDirectoryPath = ZipPathUtils.getDirectoryPath(rootFilePath);
     result.ContentDirectoryPath = contentDirectoryPath;
 
-    var package =
-        await PackageReader.readPackage(epubArchive, rootFilePath);
+    var package = await PackageReader.readPackage(epubArchive, rootFilePath);
     result.Package = package;
 
     var navigation = await NavigationReader.readNavigation(
