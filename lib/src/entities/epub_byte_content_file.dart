@@ -4,7 +4,7 @@ import 'package:quiver/core.dart';
 import 'epub_content_file.dart';
 
 class EpubByteContentFile extends EpubContentFile {
-  List<int> Content;
+  List<int>? Content;
 
   @override
   int get hashCode {

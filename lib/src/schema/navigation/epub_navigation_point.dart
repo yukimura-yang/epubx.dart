@@ -5,12 +5,12 @@ import 'epub_metadata.dart';
 import 'epub_navigation_label.dart';
 
 class EpubNavigationPoint {
-  String Id;
-  String Class;
-  String PlayOrder;
-  List<EpubNavigationLabel> NavigationLabels;
-  EpubNavigationContent Content;
-  List<EpubNavigationPoint> ChildNavigationPoints;
+  String? Id;
+  String? Class;
+  String? PlayOrder;
+  List<EpubNavigationLabel>? NavigationLabels;
+  EpubNavigationContent? Content;
+  List<EpubNavigationPoint>? ChildNavigationPoints;
 
   @override
   int get hashCode {
@@ -19,8 +19,8 @@ class EpubNavigationPoint {
       ..add(Class.hashCode)
       ..add(PlayOrder.hashCode)
       ..add(Content.hashCode)
-      ..addAll(NavigationLabels.map((label) => label.hashCode))
-      ..addAll(ChildNavigationPoints.map((point) => point.hashCode));
+      ..addAll(NavigationLabels!.map((label) => label.hashCode))
+      ..addAll(ChildNavigationPoints!.map((point) => point.hashCode));
     return hashObjects(objects);
   }
 
@@ -44,6 +44,6 @@ class EpubNavigationPoint {
   }
 
   String toString() {
-    return "Id: ${Id}, Content.Source: ${Content.Source}";
+    return 'Id: ${Id}, Content.Source: ${Content!.Source}';
   }
 }

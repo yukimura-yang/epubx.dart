@@ -4,7 +4,7 @@ import 'package:quiver/core.dart';
 import 'epub_navigation_page_target.dart';
 
 class EpubNavigationPageList {
-  List<EpubNavigationPageTarget> Targets;
+  List<EpubNavigationPageTarget>? Targets;
 
   @override
   int get hashCode {

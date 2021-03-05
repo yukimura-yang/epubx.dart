@@ -1,9 +1,9 @@
 import 'package:quiver/core.dart';
 
 class EpubMetadataIdentifier {
-  String Id;
-  String Scheme;
-  String Identifier;
+  String? Id;
+  String? Scheme;
+  String? Identifier;
 
   @override
   int get hashCode => hash3(Id.hashCode, Scheme.hashCode, Identifier.hashCode);

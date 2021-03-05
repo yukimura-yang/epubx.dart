@@ -1,12 +1,12 @@
 import 'package:quiver/core.dart';
 
 class EpubMetadataMeta {
-  String Name;
-  String Content;
-  String Id;
-  String Refines;
-  String Property;
-  String Scheme;
+  String? Name;
+  String? Content;
+  String? Id;
+  String? Refines;
+  String? Property;
+  String? Scheme;
 
   @override
   int get hashCode => hashObjects([

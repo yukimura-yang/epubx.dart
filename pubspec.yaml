@@ -1,18 +1,17 @@
 name: epub
-version: 2.1.0
+version: 3.0.0
 author: Colin Nelson <colin@orthros.dev>
 description: Epub Parser for Dart. Suitable for use on the Server, the Web, or in Flutter
 homepage: https://github.com/orthros/dart-epub
 environment:
-  sdk: ">=2.0.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 dependencies:
-  async: ">=1.8.0 <3.0.0"
-  archive: "^2.0.0"
-  quiver: ">=2.0.0 <3.0.0"
-  xml: "^4.2.0"
-  image: ">=1.1.33 <3.0.0"
-  dart2_constant: ^1.0.1
+  archive: ^3.1.2
+  quiver: ^3.0.0
+  xml: ^5.0.2
+  image: ^3.0.1
+  collection: ^1.15.0-nullsafety.4
 dev_dependencies:
   test: "^1.0.0"
   path: "^1.5.1"
-  pedantic: "^1.8.0"
+  pedantic: ^1.11.0

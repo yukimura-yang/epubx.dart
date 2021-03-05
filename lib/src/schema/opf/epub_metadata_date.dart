@@ -1,8 +1,8 @@
 import 'package:quiver/core.dart';
 
 class EpubMetadataDate {
-  String Date;
-  String Event;
+  String? Date;
+  String? Event;
 
   @override
   int get hashCode => hash2(Date.hashCode, Event.hashCode);

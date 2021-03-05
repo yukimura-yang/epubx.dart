@@ -2,11 +2,11 @@ import 'package:quiver/collection.dart' as collections;
 import 'package:quiver/core.dart';
 
 class EpubChapter {
-  String Title;
-  String ContentFileName;
-  String Anchor;
-  String HtmlContent;
-  List<EpubChapter> SubChapters;
+  String? Title;
+  String? ContentFileName;
+  String? Anchor;
+  String? HtmlContent;
+  List<EpubChapter>? SubChapters;
 
   @override
   int get hashCode {
@@ -32,6 +32,6 @@ class EpubChapter {
   }
 
   String toString() {
-    return "Title: ${Title}, Subchapter count: ${SubChapters.length}";
+    return 'Title: ${Title}, Subchapter count: ${SubChapters!.length}';
   }
 }
