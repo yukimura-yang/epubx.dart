@@ -9,18 +9,17 @@ import '../schema/opf/epub_manifest_item.dart';
 class ContentReader {
   static EpubContentRef parseContentMap(EpubBookRef bookRef) {
     var result = EpubContentRef();
-    result.Html = Map<String?, EpubTextContentFileRef>();
-    result.Css = Map<String?, EpubTextContentFileRef>();
-    result.Images = Map<String?, EpubByteContentFileRef>();
-    result.Fonts = Map<String?, EpubByteContentFileRef>();
-    result.AllFiles = Map<String?, EpubContentFileRef>();
+    result.Html = <String?, EpubTextContentFileRef>{};
+    result.Css = <String?, EpubTextContentFileRef>{};
+    result.Images = <String?, EpubByteContentFileRef>{};
+    result.Fonts = <String?, EpubByteContentFileRef>{};
+    result.AllFiles = <String?, EpubContentFileRef>{};
 
     bookRef.Schema!.Package!.Manifest!.Items!
         .forEach((EpubManifestItem manifestItem) {
       var fileName = manifestItem.Href;
       var contentMimeType = manifestItem.MediaType!;
-      var contentType =
-          getContentTypeByContentMimeType(contentMimeType);
+      var contentType = getContentTypeByContentMimeType(contentMimeType);
       switch (contentType) {
         case EpubContentType.XHTML_1_1:
         case EpubContentType.CSS:
@@ -29,8 +28,7 @@ class ContentReader {
         case EpubContentType.XML:
         case EpubContentType.DTBOOK:
         case EpubContentType.DTBOOK_NCX:
-          var epubTextContentFile =
-              EpubTextContentFileRef(bookRef);
+          var epubTextContentFile = EpubTextContentFileRef(bookRef);
           {
             epubTextContentFile.FileName = Uri.decodeFull(fileName!);
             epubTextContentFile.ContentMimeType = contentMimeType;
@@ -61,8 +59,7 @@ class ContentReader {
           result.AllFiles![fileName] = epubTextContentFile;
           break;
         default:
-          var epubByteContentFile =
-              EpubByteContentFileRef(bookRef);
+          var epubByteContentFile = EpubByteContentFileRef(bookRef);
           {
             epubByteContentFile.FileName = Uri.decodeFull(fileName!);
             epubByteContentFile.ContentMimeType = contentMimeType;

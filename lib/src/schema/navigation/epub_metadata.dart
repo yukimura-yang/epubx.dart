@@ -7,13 +7,16 @@ class EpubNavigationContent {
   @override
   int get hashCode => hash2(Id.hashCode, Source.hashCode);
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubNavigationContent;
-    if (otherAs == null) return false;
-    return Id == otherAs.Id && Source == otherAs.Source;
+    if (!(other is EpubNavigationContent)) {
+      return false;
+    }
+    return Id == other.Id && Source == other.Source;
   }
 
+  @override
   String toString() {
-    return 'Source: ${Source}';
+    return 'Source: $Source';
   }
 }

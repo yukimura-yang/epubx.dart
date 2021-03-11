@@ -20,30 +20,32 @@ class EpubBookRef {
   EpubSchema? Schema;
   EpubContentRef? Content;
   EpubBookRef(Archive epubArchive) {
-    this._epubArchive = epubArchive;
+    _epubArchive = epubArchive;
   }
 
   @override
   int get hashCode {
-    var objects = []
-      ..add(Title.hashCode)
-      ..add(Author.hashCode)
-      ..add(Schema.hashCode)
-      ..add(Content.hashCode)
-      ..addAll(AuthorList?.map((author) => author.hashCode) ?? [0]);
+    var objects = [
+      Title.hashCode,
+      Author.hashCode,
+      Schema.hashCode,
+      Content.hashCode,
+      ...AuthorList?.map((author) => author.hashCode) ?? [0],
+    ];
     return hashObjects(objects);
   }
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubBookRef;
-    if (otherAs == null) {
+    if (!(other is EpubBookRef)) {
       return false;
     }
-    return Title == otherAs.Title &&
-        Author == otherAs.Author &&
-        Schema == otherAs.Schema &&
-        Content == otherAs.Content &&
-        collections.listsEqual(AuthorList, otherAs.AuthorList);
+
+    return Title == other.Title &&
+        Author == other.Author &&
+        Schema == other.Schema &&
+        Content == other.Content &&
+        collections.listsEqual(AuthorList, other.AuthorList);
   }
 
   Archive? EpubArchive() {
@@ -51,7 +53,7 @@ class EpubBookRef {
   }
 
   Future<List<EpubChapterRef>> getChapters() async {
-    return await ChapterReader.getChapters(this);
+    return ChapterReader.getChapters(this);
   }
 
   Future<Image?> readCover() async {

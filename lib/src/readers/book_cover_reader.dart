@@ -10,8 +10,7 @@ import '../schema/opf/epub_metadata_meta.dart';
 
 class BookCoverReader {
   static Future<images.Image?> readBookCover(EpubBookRef bookRef) async {
-    var metaItems =
-        bookRef.Schema!.Package!.Metadata!.MetaItems;
+    var metaItems = bookRef.Schema!.Package!.Metadata!.MetaItems;
     if (metaItems == null || metaItems.isEmpty) return null;
 
     var coverMetaItem = metaItems.firstWhereOrNull(
@@ -24,10 +23,9 @@ class BookCoverReader {
     }
 
     var coverManifestItem = bookRef.Schema!.Package!.Manifest!.Items!
-        .firstWhereOrNull(
-            (EpubManifestItem manifestItem) =>
-                manifestItem.Id!.toLowerCase() ==
-                coverMetaItem.Content!.toLowerCase());
+        .firstWhereOrNull((EpubManifestItem manifestItem) =>
+            manifestItem.Id!.toLowerCase() ==
+            coverMetaItem.Content!.toLowerCase());
     if (coverManifestItem == null) {
       throw Exception(
           'Incorrect EPUB manifest: item with ID = \"${coverMetaItem.Content}\" is missing.');

@@ -42,7 +42,7 @@ class NavigationReader {
             item.Id!.toLowerCase() == tocId.toLowerCase());
     if (tocManifestItem == null) {
       throw Exception(
-          'EPUB parsing error: TOC item ${tocId} not found in EPUB manifest.');
+          'EPUB parsing error: TOC item $tocId not found in EPUB manifest.');
     }
 
     var tocFileEntryPath =
@@ -51,16 +51,16 @@ class NavigationReader {
         file.name.toLowerCase() == tocFileEntryPath!.toLowerCase());
     if (tocFileEntry == null) {
       throw Exception(
-          'EPUB parsing error: TOC file ${tocFileEntryPath} not found in archive.');
+          'EPUB parsing error: TOC file $tocFileEntryPath not found in archive.');
     }
 
     var containerDocument =
-        xml.parse(convert.utf8.decode(tocFileEntry.content));
+        xml.XmlDocument.parse(convert.utf8.decode(tocFileEntry.content));
 
     var ncxNamespace = 'http://www.daisy.org/z3986/2005/ncx/';
     var ncxNode = containerDocument
         .findAllElements('ncx', namespace: ncxNamespace)
-        .firstWhereOrNull((xml.XmlElement elem) => elem != null);
+        .firstWhereOrNull((xml.XmlElement? elem) => elem != null);
     if (ncxNode == null) {
       throw Exception(
           'EPUB parsing error: TOC file does not contain ncx element.');
@@ -68,7 +68,7 @@ class NavigationReader {
 
     var headNode = ncxNode
         .findAllElements('head', namespace: ncxNamespace)
-        .firstWhereOrNull((xml.XmlElement elem) => elem != null);
+        .firstWhereOrNull((xml.XmlElement? elem) => elem != null);
     if (headNode == null) {
       throw Exception(
           'EPUB parsing error: TOC file does not contain head element.');
@@ -78,7 +78,7 @@ class NavigationReader {
     result.Head = navigationHead;
     var docTitleNode = ncxNode
         .findElements('docTitle', namespace: ncxNamespace)
-        .firstWhereOrNull((xml.XmlElement elem) => elem != null);
+        .firstWhereOrNull((xml.XmlElement? elem) => elem != null);
     if (docTitleNode == null) {
       throw Exception(
           'EPUB parsing error: TOC file does not contain docTitle element.');
@@ -96,7 +96,7 @@ class NavigationReader {
 
     var navMapNode = ncxNode
         .findElements('navMap', namespace: ncxNamespace)
-        .firstWhereOrNull((xml.XmlElement elem) => elem != null);
+        .firstWhereOrNull((xml.XmlElement? elem) => elem != null);
     if (navMapNode == null) {
       throw Exception(
           'EPUB parsing error: TOC file does not contain navMap element.');
@@ -106,7 +106,7 @@ class NavigationReader {
     result.NavMap = navMap;
     var pageListNode = ncxNode
         .findElements('pageList', namespace: ncxNamespace)
-        .firstWhereOrNull((xml.XmlElement elem) => elem != null);
+        .firstWhereOrNull((xml.XmlElement? elem) => elem != null);
     if (pageListNode != null) {
       var pageList = readNavigationPageList(pageListNode);
       result.PageList = pageList;
@@ -219,7 +219,7 @@ class NavigationReader {
 
     var navigationLabelTextNode = navigationLabelNode
         .findElements('text', namespace: navigationLabelNode.name.namespaceUri)
-        .firstWhereOrNull((xml.XmlElement elem) => elem != null);
+        .firstWhereOrNull((xml.XmlElement? elem) => elem != null);
     if (navigationLabelTextNode == null) {
       throw Exception(
           'Incorrect EPUB navigation label: label text element is missing.');

@@ -11,13 +11,13 @@ abstract class EpubContentFile {
   int get hashCode =>
       hash3(FileName.hashCode, ContentType.hashCode, ContentMimeType.hashCode);
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubContentFile;
-    if (otherAs == null) {
+    if (!(other is EpubContentFile)) {
       return false;
     }
-    return FileName == otherAs.FileName &&
-        ContentType == otherAs.ContentType &&
-        ContentMimeType == otherAs.ContentMimeType;
+    return FileName == other.FileName &&
+        ContentType == other.ContentType &&
+        ContentMimeType == other.ContentMimeType;
   }
 }

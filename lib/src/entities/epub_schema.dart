@@ -12,14 +12,14 @@ class EpubSchema {
   int get hashCode => hash3(
       Package.hashCode, Navigation.hashCode, ContentDirectoryPath.hashCode);
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubSchema;
-    if (otherAs == null) {
+    if (!(other is EpubSchema)) {
       return false;
     }
 
-    return Package == otherAs.Package &&
-        Navigation == otherAs.Navigation &&
-        ContentDirectoryPath == otherAs.ContentDirectoryPath;
+    return Package == other.Package &&
+        Navigation == other.Navigation &&
+        ContentDirectoryPath == other.ContentDirectoryPath;
   }
 }
