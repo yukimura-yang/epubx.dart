@@ -14,18 +14,20 @@ class EpubNavigationPoint {
 
   @override
   int get hashCode {
-    var objects = []
-      ..add(Id.hashCode)
-      ..add(Class.hashCode)
-      ..add(PlayOrder.hashCode)
-      ..add(Content.hashCode)
-      ..addAll(NavigationLabels!.map((label) => label.hashCode))
-      ..addAll(ChildNavigationPoints!.map((point) => point.hashCode));
+    var objects = [
+      Id.hashCode,
+      Class.hashCode,
+      PlayOrder.hashCode,
+      Content.hashCode,
+      ...NavigationLabels!.map((label) => label.hashCode),
+      ...ChildNavigationPoints!.map((point) => point.hashCode)
+    ];
     return hashObjects(objects);
   }
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubNavigationPoint;
+    var otherAs = other as EpubNavigationPoint?;
     if (otherAs == null) {
       return false;
     }
@@ -43,7 +45,8 @@ class EpubNavigationPoint {
         Content == otherAs.Content;
   }
 
+  @override
   String toString() {
-    return 'Id: ${Id}, Content.Source: ${Content!.Source}';
+    return 'Id: $Id, Content.Source: ${Content!.Source}';
   }
 }

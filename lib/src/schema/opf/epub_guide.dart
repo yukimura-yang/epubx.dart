@@ -17,8 +17,9 @@ class EpubGuide {
     return hashObjects(objects);
   }
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubGuide;
+    var otherAs = other as EpubGuide?;
     if (otherAs == null) {
       return false;
     }

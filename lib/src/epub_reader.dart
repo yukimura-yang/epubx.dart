@@ -18,8 +18,38 @@ import 'ref_entities/epub_content_ref.dart';
 import 'ref_entities/epub_text_content_file_ref.dart';
 import 'schema/opf/epub_metadata_creator.dart';
 
+/// A class that provides the primary interface to read Epub files.
+///
+/// To open an Epub and load all data at once use the [readBook()] method.
+///
+/// To open an Epub and load only basic metadata use the [openBook()] method.
+/// This is a good option to quickly load text-based metadata, while leaving the
+/// heavier lifting of loading images and main content for subsequent operations.
+///
+/// ## Example
+/// ```dart
+/// // Read the basic metadata.
+/// EpubBookRef epub = await EpubReader.openBook(epubFileBytes);
+/// // Extract values of interest.
+/// String title = epub.Title;
+/// String author = epub.Author;
+/// var metadata = epub.Schema.Package.Metadata;
+/// String genres = metadata.Subjects.join(', ');
+/// ```
 class EpubReader {
-  /// Opens the book asynchronously without reading its content. Holds the handle to the EPUB file.
+  /// Loads basics metadata.
+  ///
+  /// Opens the book asynchronously without reading its main content.
+  /// Holds the handle to the EPUB file.
+  ///
+  /// Argument [bytes] should be the bytes of
+  /// the epub file you have loaded with something like the [dart:io] package's
+  /// [readAsBytes()].
+  ///
+  /// This is a fast and convenient way to get the most important information
+  /// about the book, notably the [Title], [Author] and [AuthorList].
+  /// Additional information is loaded in the [Schema] property such as the
+  /// Epub version, Publishers, Languages and more.
   static Future<EpubBookRef> openBook(FutureOr<List<int>> bytes) async {
     List<int> loadedBytes;
     if (bytes is Future) {
@@ -71,20 +101,20 @@ class EpubReader {
     result.Css = await readTextContentFiles(contentRef.Css!);
     result.Images = await readByteContentFiles(contentRef.Images!);
     result.Fonts = await readByteContentFiles(contentRef.Fonts!);
-    result.AllFiles = <String?, EpubContentFile>{};
+    result.AllFiles = <String, EpubContentFile>{};
 
     result.Html!.forEach((String? key, EpubTextContentFile value) {
-      result.AllFiles![key] = value;
+      result.AllFiles![key!] = value;
     });
     result.Css!.forEach((String? key, EpubTextContentFile value) {
-      result.AllFiles![key] = value;
+      result.AllFiles![key!] = value;
     });
 
     result.Images!.forEach((String? key, EpubByteContentFile value) {
-      result.AllFiles![key] = value;
+      result.AllFiles![key!] = value;
     });
     result.Fonts!.forEach((String? key, EpubByteContentFile value) {
-      result.AllFiles![key] = value;
+      result.AllFiles![key!] = value;
     });
 
     await Future.forEach(contentRef.AllFiles!.keys, (dynamic key) async {
@@ -97,9 +127,9 @@ class EpubReader {
     return result;
   }
 
-  static Future<Map<String?, EpubTextContentFile>> readTextContentFiles(
-      Map<String?, EpubTextContentFileRef> textContentFileRefs) async {
-    var result = <String?, EpubTextContentFile>{};
+  static Future<Map<String, EpubTextContentFile>> readTextContentFiles(
+      Map<String, EpubTextContentFileRef> textContentFileRefs) async {
+    var result = <String, EpubTextContentFile>{};
 
     await Future.forEach(textContentFileRefs.keys, (dynamic key) async {
       EpubContentFileRef value = textContentFileRefs[key]!;
@@ -113,9 +143,9 @@ class EpubReader {
     return result;
   }
 
-  static Future<Map<String?, EpubByteContentFile>> readByteContentFiles(
-      Map<String?, EpubByteContentFileRef> byteContentFileRefs) async {
-    var result = <String?, EpubByteContentFile>{};
+  static Future<Map<String, EpubByteContentFile>> readByteContentFiles(
+      Map<String, EpubByteContentFileRef> byteContentFileRefs) async {
+    var result = <String, EpubByteContentFile>{};
     await Future.forEach(byteContentFileRefs.keys, (dynamic key) async {
       result[key] = await readByteContentFile(byteContentFileRefs[key]!);
     });

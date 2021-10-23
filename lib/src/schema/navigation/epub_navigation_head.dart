@@ -12,12 +12,13 @@ class EpubNavigationHead {
 
   @override
   int get hashCode {
-    var objects = []..addAll(Metadata!.map((meta) => meta.hashCode));
+    var objects = [...Metadata!.map((meta) => meta.hashCode)];
     return hashObjects(objects);
   }
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubNavigationHead;
+    var otherAs = other as EpubNavigationHead?;
     if (otherAs == null) {
       return false;
     }

@@ -10,12 +10,13 @@ class EpubNavigationDocTitle {
 
   @override
   int get hashCode {
-    var objects = []..addAll(Titles!.map((title) => title.hashCode));
+    var objects = [...Titles!.map((title) => title.hashCode)];
     return hashObjects(objects);
   }
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubNavigationDocTitle;
+    var otherAs = other as EpubNavigationDocTitle?;
     if (otherAs == null) return false;
 
     return collections.listsEqual(Titles, otherAs.Titles);

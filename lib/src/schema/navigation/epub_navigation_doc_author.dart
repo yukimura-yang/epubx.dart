@@ -10,12 +10,13 @@ class EpubNavigationDocAuthor {
 
   @override
   int get hashCode {
-    var objects = []..addAll(Authors!.map((author) => author.hashCode));
+    var objects = [...Authors!.map((author) => author.hashCode)];
     return hashObjects(objects);
   }
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubNavigationDocAuthor;
+    var otherAs = other as EpubNavigationDocAuthor?;
     if (otherAs == null) return false;
 
     return collections.listsEqual(Authors, otherAs.Authors);

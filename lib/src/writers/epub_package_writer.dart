@@ -26,6 +26,6 @@ class EpubPackageWriter {
       EpubGuideWriter.writeGuide(builder, package.Guide);
     });
 
-    return builder.build().toXmlString(pretty: false);
+    return builder.buildDocument().toXmlString(pretty: false);
   }
 }
