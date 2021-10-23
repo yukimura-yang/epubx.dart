@@ -6,18 +6,18 @@ import 'epub_content_file.dart';
 import 'epub_text_content_file.dart';
 
 class EpubContent {
-  Map<String?, EpubTextContentFile>? Html;
-  Map<String?, EpubTextContentFile>? Css;
-  Map<String?, EpubByteContentFile>? Images;
-  Map<String?, EpubByteContentFile>? Fonts;
-  Map<String?, EpubContentFile>? AllFiles;
+  Map<String, EpubTextContentFile>? Html;
+  Map<String, EpubTextContentFile>? Css;
+  Map<String, EpubByteContentFile>? Images;
+  Map<String, EpubByteContentFile>? Fonts;
+  Map<String, EpubContentFile>? AllFiles;
 
   EpubContent() {
     Html = <String, EpubTextContentFile>{};
     Css = <String, EpubTextContentFile>{};
     Images = <String, EpubByteContentFile>{};
     Fonts = <String, EpubByteContentFile>{};
-    AllFiles = <String?, EpubContentFile>{};
+    AllFiles = <String, EpubContentFile>{};
   }
 
   @override

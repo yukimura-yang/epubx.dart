@@ -19,8 +19,9 @@ class EpubMetadataMeta {
         Scheme.hashCode
       ]);
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubMetadataMeta;
+    var otherAs = other as EpubMetadataMeta?;
     if (otherAs == null) return false;
     return Name == otherAs.Name &&
         Content == otherAs.Content &&

@@ -24,8 +24,9 @@ class EpubManifestItem {
         Properties.hashCode
       ]);
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubManifestItem;
+    var otherAs = other as EpubManifestItem?;
     if (otherAs == null) {
       return false;
     }
@@ -41,7 +42,8 @@ class EpubManifestItem {
         Properties == otherAs.Properties;
   }
 
+  @override
   String toString() {
-    return "Id: ${Id}, Href = ${Href}, MediaType = ${MediaType}, Properties = ${Properties}, MediaOverlay = ${MediaOverlay}";
+    return 'Id: $Id, Href = $Href, MediaType = $MediaType, Properties = $Properties, MediaOverlay = $MediaOverlay';
   }
 }

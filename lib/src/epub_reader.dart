@@ -101,20 +101,20 @@ class EpubReader {
     result.Css = await readTextContentFiles(contentRef.Css!);
     result.Images = await readByteContentFiles(contentRef.Images!);
     result.Fonts = await readByteContentFiles(contentRef.Fonts!);
-    result.AllFiles = <String?, EpubContentFile>{};
+    result.AllFiles = <String, EpubContentFile>{};
 
     result.Html!.forEach((String? key, EpubTextContentFile value) {
-      result.AllFiles![key] = value;
+      result.AllFiles![key!] = value;
     });
     result.Css!.forEach((String? key, EpubTextContentFile value) {
-      result.AllFiles![key] = value;
+      result.AllFiles![key!] = value;
     });
 
     result.Images!.forEach((String? key, EpubByteContentFile value) {
-      result.AllFiles![key] = value;
+      result.AllFiles![key!] = value;
     });
     result.Fonts!.forEach((String? key, EpubByteContentFile value) {
-      result.AllFiles![key] = value;
+      result.AllFiles![key!] = value;
     });
 
     await Future.forEach(contentRef.AllFiles!.keys, (dynamic key) async {
@@ -127,9 +127,9 @@ class EpubReader {
     return result;
   }
 
-  static Future<Map<String?, EpubTextContentFile>> readTextContentFiles(
-      Map<String?, EpubTextContentFileRef> textContentFileRefs) async {
-    var result = <String?, EpubTextContentFile>{};
+  static Future<Map<String, EpubTextContentFile>> readTextContentFiles(
+      Map<String, EpubTextContentFileRef> textContentFileRefs) async {
+    var result = <String, EpubTextContentFile>{};
 
     await Future.forEach(textContentFileRefs.keys, (dynamic key) async {
       EpubContentFileRef value = textContentFileRefs[key]!;
@@ -143,9 +143,9 @@ class EpubReader {
     return result;
   }
 
-  static Future<Map<String?, EpubByteContentFile>> readByteContentFiles(
-      Map<String?, EpubByteContentFileRef> byteContentFileRefs) async {
-    var result = <String?, EpubByteContentFile>{};
+  static Future<Map<String, EpubByteContentFile>> readByteContentFiles(
+      Map<String, EpubByteContentFileRef> byteContentFileRefs) async {
+    var result = <String, EpubByteContentFile>{};
     await Future.forEach(byteContentFileRefs.keys, (dynamic key) async {
       result[key] = await readByteContentFile(byteContentFileRefs[key]!);
     });

@@ -9,11 +9,11 @@ import '../schema/opf/epub_manifest_item.dart';
 class ContentReader {
   static EpubContentRef parseContentMap(EpubBookRef bookRef) {
     var result = EpubContentRef();
-    result.Html = <String?, EpubTextContentFileRef>{};
-    result.Css = <String?, EpubTextContentFileRef>{};
-    result.Images = <String?, EpubByteContentFileRef>{};
-    result.Fonts = <String?, EpubByteContentFileRef>{};
-    result.AllFiles = <String?, EpubContentFileRef>{};
+    result.Html = <String, EpubTextContentFileRef>{};
+    result.Css = <String, EpubTextContentFileRef>{};
+    result.Images = <String, EpubByteContentFileRef>{};
+    result.Fonts = <String, EpubByteContentFileRef>{};
+    result.AllFiles = <String, EpubContentFileRef>{};
 
     bookRef.Schema!.Package!.Manifest!.Items!
         .forEach((EpubManifestItem manifestItem) {

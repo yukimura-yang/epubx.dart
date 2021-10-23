@@ -8,8 +8,9 @@ class EpubGuideReference {
   @override
   int get hashCode => hash3(Type.hashCode, Title.hashCode, Href.hashCode);
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubGuideReference;
+    var otherAs = other as EpubGuideReference?;
     if (otherAs == null) {
       return false;
     }
@@ -19,7 +20,8 @@ class EpubGuideReference {
         Href == otherAs.Href;
   }
 
+  @override
   String toString() {
-    return 'Type: ${Type}, Href: ${Href}';
+    return 'Type: $Type, Href: $Href';
   }
 }

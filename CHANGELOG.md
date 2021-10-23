@@ -1,7 +1,9 @@
 ## 3.0.0
 ### Changed
 - `metadata` file now saves as `mimetype` [pull#1](https://github.com/rbcprolabs/epubx.dart/pull/1) 
-
+### Added
+- Epub v3 support [dart-epub | pull#76](https://github.com/orthros/dart-epub/pull/76) 
+- Doc comment [dart-epub | pull#80](https://github.com/orthros/dart-epub/pull/80) 
 
 ## 3.0.0-dev.3
 ### Changed

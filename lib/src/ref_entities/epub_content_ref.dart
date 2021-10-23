@@ -6,18 +6,18 @@ import 'epub_content_file_ref.dart';
 import 'epub_text_content_file_ref.dart';
 
 class EpubContentRef {
-  Map<String?, EpubTextContentFileRef>? Html;
-  Map<String?, EpubTextContentFileRef>? Css;
-  Map<String?, EpubByteContentFileRef>? Images;
-  Map<String?, EpubByteContentFileRef>? Fonts;
-  Map<String?, EpubContentFileRef>? AllFiles;
+  Map<String, EpubTextContentFileRef>? Html;
+  Map<String, EpubTextContentFileRef>? Css;
+  Map<String, EpubByteContentFileRef>? Images;
+  Map<String, EpubByteContentFileRef>? Fonts;
+  Map<String, EpubContentFileRef>? AllFiles;
 
   EpubContentRef() {
-    Html = <String?, EpubTextContentFileRef>{};
-    Css = <String?, EpubTextContentFileRef>{};
-    Images = <String?, EpubByteContentFileRef>{};
-    Fonts = <String?, EpubByteContentFileRef>{};
-    AllFiles = <String?, EpubContentFileRef>{};
+    Html = <String, EpubTextContentFileRef>{};
+    Css = <String, EpubTextContentFileRef>{};
+    Images = <String, EpubByteContentFileRef>{};
+    Fonts = <String, EpubByteContentFileRef>{};
+    AllFiles = <String, EpubContentFileRef>{};
   }
 
   @override

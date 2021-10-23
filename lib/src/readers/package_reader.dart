@@ -77,10 +77,10 @@ class PackageReader {
             case 'media-type':
               manifestItem.MediaType = attributeValue;
               break;
-            case "media-overlay":
+            case 'media-overlay':
               manifestItem.MediaOverlay = attributeValue;
               break;
-            case "required-namespace":
+            case 'required-namespace':
               manifestItem.RequiredNamespace = attributeValue;
               break;
             case 'required-modules':
@@ -92,7 +92,7 @@ class PackageReader {
             case 'fallback-style':
               manifestItem.FallbackStyle = attributeValue;
               break;
-            case "properties":
+            case 'properties':
               manifestItem.Properties = attributeValue;
               break;
           }
@@ -288,11 +288,11 @@ class PackageReader {
 
   static EpubMetadataMeta readMetadataMetaVersion3(
       XmlElement metadataMetaNode) {
-    EpubMetadataMeta result = EpubMetadataMeta();
+    var result = EpubMetadataMeta();
     result.Attributes = {};
     metadataMetaNode.attributes
         .forEach((XmlAttribute metadataMetaNodeAttribute) {
-      String attributeValue = metadataMetaNodeAttribute.value;
+      var attributeValue = metadataMetaNodeAttribute.value;
       result.Attributes![metadataMetaNodeAttribute.name.local.toLowerCase()] =
           attributeValue;
       switch (metadataMetaNodeAttribute.name.local.toLowerCase()) {
@@ -379,10 +379,9 @@ class PackageReader {
     result.Items = <EpubSpineItemRef>[];
     var tocAttribute = spineNode.getAttribute('toc');
     result.TableOfContents = tocAttribute;
-    String? pageProgression =
-        spineNode.getAttribute("page-progression-direction");
+    var pageProgression = spineNode.getAttribute('page-progression-direction');
     result.ltr =
-        ((pageProgression == null) || pageProgression.toLowerCase() == "ltr");
+        ((pageProgression == null) || pageProgression.toLowerCase() == 'ltr');
     spineNode.children
         .whereType<XmlElement>()
         .forEach((XmlElement spineItemNode) {

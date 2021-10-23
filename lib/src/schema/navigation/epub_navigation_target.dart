@@ -14,18 +14,20 @@ class EpubNavigationTarget {
 
   @override
   int get hashCode {
-    var objects = []
-      ..add(Id.hashCode)
-      ..add(Class.hashCode)
-      ..add(Value.hashCode)
-      ..add(PlayOrder.hashCode)
-      ..add(Content.hashCode)
-      ..addAll(NavigationLabels!.map((label) => label.hashCode));
+    var objects = [
+      Id.hashCode,
+      Class.hashCode,
+      Value.hashCode,
+      PlayOrder.hashCode,
+      Content.hashCode,
+      ...NavigationLabels!.map((label) => label.hashCode)
+    ];
     return hashObjects(objects);
   }
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubNavigationTarget;
+    var otherAs = other as EpubNavigationTarget?;
     if (otherAs == null) return false;
 
     if (!(Id == otherAs.Id &&

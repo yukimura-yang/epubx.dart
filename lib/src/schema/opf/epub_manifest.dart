@@ -15,8 +15,9 @@ class EpubManifest {
     return hashObjects(Items!.map((item) => item.hashCode));
   }
 
+  @override
   bool operator ==(other) {
-    var otherAs = other as EpubManifest;
+    var otherAs = other as EpubManifest?;
     if (otherAs == null) {
       return false;
     }
