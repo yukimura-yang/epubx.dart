@@ -77,7 +77,10 @@ class PackageReader {
             case 'media-type':
               manifestItem.MediaType = attributeValue;
               break;
-            case 'required-namespace':
+            case "media-overlay":
+              manifestItem.MediaOverlay = attributeValue;
+              break;
+            case "required-namespace":
               manifestItem.RequiredNamespace = attributeValue;
               break;
             case 'required-modules':
@@ -88,6 +91,9 @@ class PackageReader {
               break;
             case 'fallback-style':
               manifestItem.FallbackStyle = attributeValue;
+              break;
+            case "properties":
+              manifestItem.Properties = attributeValue;
               break;
           }
         });
@@ -282,10 +288,13 @@ class PackageReader {
 
   static EpubMetadataMeta readMetadataMetaVersion3(
       XmlElement metadataMetaNode) {
-    var result = EpubMetadataMeta();
+    EpubMetadataMeta result = EpubMetadataMeta();
+    result.Attributes = {};
     metadataMetaNode.attributes
         .forEach((XmlAttribute metadataMetaNodeAttribute) {
-      var attributeValue = metadataMetaNodeAttribute.value;
+      String attributeValue = metadataMetaNodeAttribute.value;
+      result.Attributes![metadataMetaNodeAttribute.name.local.toLowerCase()] =
+          attributeValue;
       switch (metadataMetaNodeAttribute.name.local.toLowerCase()) {
         case 'id':
           result.Id = attributeValue;
@@ -370,6 +379,10 @@ class PackageReader {
     result.Items = <EpubSpineItemRef>[];
     var tocAttribute = spineNode.getAttribute('toc');
     result.TableOfContents = tocAttribute;
+    String? pageProgression =
+        spineNode.getAttribute("page-progression-direction");
+    result.ltr =
+        ((pageProgression == null) || pageProgression.toLowerCase() == "ltr");
     spineNode.children
         .whereType<XmlElement>()
         .forEach((XmlElement spineItemNode) {
